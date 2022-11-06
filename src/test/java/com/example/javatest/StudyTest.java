@@ -1,7 +1,10 @@
 package com.example.javatest;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.*;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.condition.OS;
 
 import java.time.Duration;
 
@@ -14,17 +17,17 @@ class StudyTest {
     @EnabledOnJre(JRE.JAVA_11)
     @EnabledOnOs(OS.MAC)
     void create() {
-        Study study = new Study();
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
-            new Study();
+            new Study(10, "김종찬");
             Thread.sleep(50);
         });
 
+        Study study = new Study(10, "김종찬");
         assertAll(
                 () -> assertNotNull(study),
                 () -> assertEquals(StudyStatus.DRAFT, study.getStatus(),
                         () -> "스터디를 처음 만들면 + " + StudyStatus.DRAFT + "T여야 한다."),
-                () -> assertEquals(0, study.getLimit(), "스터디 최대 참석 가능 인원은 0보다 커야한다")
+                () -> assertEquals(10, study.getLimit(), "스터디 최대 참석 가능 인원은 0보다 커야한다")
         );
     }
 
