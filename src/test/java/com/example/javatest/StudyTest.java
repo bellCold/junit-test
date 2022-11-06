@@ -1,8 +1,8 @@
 package com.example.javatest;
 
+import com.example.javatest.domain.Study;
+import com.example.javatest.study.StudyStatus;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.Extensions;
 
 import java.time.Duration;
 

@@ -1,10 +1,15 @@
-package com.example.javatest;
+package com.example.javatest.domain;
+
+import com.example.javatest.study.StudyStatus;
+
+import java.util.Optional;
 
 public class Study {
     private StudyStatus status = StudyStatus.DRAFT;
 
     private int limit;
     private String name;
+    private Member member;
 
     public Study(int limit, String name) {
         this.limit = limit;
@@ -34,5 +39,9 @@ public class Study {
                 ", limit=" + limit +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void setOwner(Member member) {
+        this.member = member;
     }
 }
