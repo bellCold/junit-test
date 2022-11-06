@@ -1,6 +1,7 @@
 package com.example.javatest;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
 
 import java.time.Duration;
 
@@ -10,6 +11,8 @@ class StudyTest {
 
     @Test
     @DisplayName("스터디 만들기")
+    @EnabledOnJre(JRE.JAVA_11)
+    @EnabledOnOs(OS.MAC)
     void create() {
         Study study = new Study();
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
