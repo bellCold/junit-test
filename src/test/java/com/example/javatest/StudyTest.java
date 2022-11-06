@@ -1,22 +1,23 @@
 package com.example.javatest;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.EnabledOnJre;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.JRE;
-import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.Extensions;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
 
+    int value = 1;
+
+    @Order(2)
     @Test
     @DisplayName("스터디 만들기")
-    @EnabledOnJre(JRE.JAVA_11)
-    @EnabledOnOs(OS.MAC)
     void create() {
+        System.out.println(value++);
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
             new Study(10, "김종찬");
             Thread.sleep(50);
@@ -31,19 +32,21 @@ class StudyTest {
         );
     }
 
+    @Order(1)
     @Test
     @DisplayName("스터디1 만들기")
     void create1() {
         System.out.println("create1");
+        System.out.println(value++);
     }
 
     @BeforeAll
-    static void beforeAll() {
+    void beforeAll() {
         System.out.println("beforeAll");
     }
 
     @AfterAll
-    static void afterAll() {
+    void afterAll() {
         System.out.println("afterAll");
     }
 
