@@ -4,8 +4,6 @@ import com.example.javatest.domain.Member;
 import com.example.javatest.domain.Study;
 import com.example.javatest.member.MemberService;
 
-import java.util.Optional;
-
 public class StudyService {
 
     private final MemberService memberService;
@@ -22,6 +20,9 @@ public class StudyService {
         Member member = memberService.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member does not exist"));
         study.setOwner(member);
-        return studyRepository.save(study);
+
+        Study newStudy = studyRepository.save(study);
+        memberService.notify(newStudy);
+        return newStudy;
     }
 }
